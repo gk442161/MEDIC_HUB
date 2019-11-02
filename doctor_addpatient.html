@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Medic Hub</title>
+  <link rel="stylesheet" type="text/css" href="css/doctor_addpatient.css">
+  <script src="javascript/jquerry.js"></script>
+  <script>$('#sign_out').on('click',function() {
+    $(this).fadeOut(200);
+    $(this).load('php/logout.php');
+    sessionStorage.removeItem('profession');
+    window.open('initial_mainframe.html','_self');}
+    );</script>
+</head>
+<body>
+    <header>
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">   
+            <div class="navbar">
+                    <!--
+                    <div class="logo">
+                    <img src="image/logo.jpg" height="120px" width="120px">
+                </div>-->
+                <nav class="fill">
+                    <ul>
+                        <li><a href="after_loginHome.html"><i class="fa fa-home"></i>&nbsp;HOME</a></li>
+                        <li><a href="after_loginSupport.html"><i class="fa fa-thumbs-o-up"></i>&nbsp;FAQ/SUPPORT</a></li>
+              
+                        <li id="sign_out"><a href="initial_mainframe.html"><i class="fa fa-sign-out"></i>&nbsp;SIGN-OUT</a></li>
+                     
+                    </ul>
+                  </nav>
+                </section>
+                <section style="background: #34495e; color: rgba(255, 255, 255, 0.5);">
+            </div><br>
+
+                  <div class="bg-img">
+                        <div class="container">
+                          <div class="fill">
+                          <div class="topnav">
+                              <a href="doctor_home.html" ><i class="fa fa-home"></i> &nbsp; DashBoard</a>
+                                <a href="doctor_searchpatient.html"><i class="fa fa-search"></i> &nbsp; Search Patient</a>
+                                <a href="doctor_patientemail.html"><i class="fa fa-envelope"></i> &nbsp;Patient Email</a>
+                                <a href="#" class="active"><i class="fa fa-plus"></i>  &nbsp;Add Patient</a>
+                                <a href="doctor_updatepatient.html"><i class="fa fa-pencil"></i> &nbsp; Update Patient</a>
+                          </div>
+                        </div>
+                  </div>
+                </div>
+
+                      <br>
+                      <br><div class="bgc"> 
+                        <h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Enter patient id for result diagonisis : </h1><br><br><br>
+                        <form class="example"  style="margin:auto;max-width:700px">
+  <input type="text" placeholder="Enter patient id.." id="patient_username" name="search2">
+  <button type="submit" class="sbt"><i class="fa fa-plus "></i></button>
+  <div class="new_row"></div>
+</form>
+</div>
+
+    </header>
+
+    <script>
+    
+    alert('start');
+        $('.sbt').on('click',function(e){
+          e.preventDefault();
+          alert('dfsdfsfsdf');
+          var xmlhttp;
+          if (window.XMLHttpRequest) { // for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+                } 
+         else { // for IE6, IE5
+                    alert('now you are in else');
+                     xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+          xmlhttp.onreadystatechange=function()
+           {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                  {alert('in on load');
+                  var rp=xmlhttp.responseText;
+                  $('.new_row').append(rp);
+                  }
+          };                     
+          xmlhttp.open("POST", "php/patient_update.php", false);
+          alert('now you are in data');
+          xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+          var sending_data="patient_username="+$('#patient_username').val();
+          xmlhttp.send(encodeURI(sending_data));
+        });
+    </script>
+</body>
+</html>

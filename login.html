@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login_page</title>
+    <script src="javascript/jquerry.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/login.css">
+</head>
+<body>
+
+
+
+
+
+
+	<div class="logo">
+		<h1><a href="initial_mainframe.html">Medic Hub </a></h1>
+	</div>
+<form method="POST" class ="cointainer1">
+
+<fieldset class="login-box">
+          <legend class="login-word">Login</legend>
+          <div class="container">
+            <p>Connect with your doctor, access and share your health records</p>
+
+            
+            <input type="text" name="id" placeholder="Enter your username" id="username" required><br>
+            <input id="password" type="password" name="password" placeholder="Enter your password" required><br>
+            <div id="password_invalid" style="display: none"></div>
+            <input id="sbt" class="submit" type="submit" name="submit" value="Login" ><br>
+            <div id="validating" style="display: none">Validating...</div>
+            <a href="#">Forgot your password?</a>
+
+
+          </div>
+        </fieldset>
+        <div class="login">
+        <label class="lab"> Not a Medic Hub member? 
+        <a href="selection.html">Join Now</a>
+        </label>
+    	</div>
+
+    </form>
+
+    <script>
+        $('#sbt').click(function(e){
+            
+                  e.preventDefault();
+                  
+                  $('#password_invalid').empty().hide();
+                  $('#sbt').hide();
+                  $('#validating').fadeIn(200);
+                  var xmlhttp;
+                  if (window.XMLHttpRequest) { // for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                    } 
+                    else { // for IE6, IE5
+                     xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                  
+                  xmlhttp.onreadystatechange=function()
+                    {
+                     if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                  {
+                  
+                  var rp=xmlhttp.responseText.trim();
+
+                                if(!rp.localeCompare("doctor")){
+
+                                  window.open('doctor_home.html','_self');
+                                  sessionStorage.setItem('profession','doctor');
+                                              }
+                                else{
+                                              if(!rp.localeCompare("patient")){                  
+                                                   window.open('patient_home.html','_self');
+                                                   sessionStorage.setItem('profession','patient');}
+                                              else{
+                                                    if (rp.localeCompare("password_invalid")==0) {
+                                                                      $('#validating').hide();
+                                                                      $('#password_invalid').show().append('<p style="color:red;">invalid password</p>');
+                                                                      
+                                                                      $('#sbt').fadeIn(300);
+                                                                   }
+                                                    else{
+                                                                $('#password_invalid').show().append('<p style="color:red;">INVALID USERNAME/EMAIL OR PASSWORD<p>')
+                                                                $('#validating').hide();
+                                                                $('#sbt').fadeIn(3000); 
+                                                                }       
+                                                        }    
+                                                                 
+                                                            
+                                              }
+                                      }
+                                    } ;
+                                  
+                  xmlhttp.open("POST", "php/login.php", false);
+                 
+                  xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                 
+                 function xwwwfurlenc(srcjson){
+                                    if(typeof srcjson !== "object")
+                                      if(typeof console !== "undefined"){
+                                        console.log("\"srcjson\" is not a JSON object");
+                                        return null;
+                                      }
+                                    u = encodeURIComponent;
+                                    var urljson = "";
+                                    var keys = Object.keys(srcjson);
+                                    for(var i=0; i <keys.length; i++){
+                                        urljson += u(keys[i]) + "=" + u(srcjson[keys[i]]);
+                                        if(i < (keys.length-1))urljson+="&";
+                                    }
+                                    return urljson;
+                                }
+
+                 function dexwwwfurlenc(urljson){
+                        var dstjson = {};
+                        var ret;
+                        var reg = /(?:^|&)(\w+)=(\w+)/g;
+                        while((ret = reg.exec(urljson)) !== null){
+                            dstjson[ret[1]] = ret[2];
+                        }
+                        return dstjson;
+                    }
+                    
+                  var username=$('#username').val();
+                  var password=$('#password').val();
+                  
+                  var data={'username':username,'password':password};
+                  xmlhttp.send(xwwwfurlenc(data));
+
+                
+                }
+              );
+    </script>
+</body>
+</html>

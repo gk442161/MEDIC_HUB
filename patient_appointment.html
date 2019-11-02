@@ -1,0 +1,164 @@
+<html>
+    <script src="../baga/javascript/jquerry.js"></script>
+    <body>
+        <div>ENTER THE DOCTER USERNAME</div>
+        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name"></div>
+        <ul id="myUL" style="display: none;">
+        </ul>
+        <select name="slot_timing" id="slot_id">
+            <option value="2">11:15 am</option>
+            <option  id='filtered_slot_id' value="1">11:00 am</option>
+            <option id='filtered_slot_id' value="3">11:30 am</option>
+            <option id='filtered_slot_id' value="4">11:45 am</option>
+            <option id='filtered_slot_id' value="5">12:00 pm</option>
+            <option id='filtered_slot_id' value="6">12:15 pm</option>
+            <option id='filtered_slot_id' value="7">12:30 pm</option>
+            <option id='filtered_slot_id' value="8">12:45 pm</option>
+            <option id='filtered_slot_id' value="9">12:00 pm</option>
+            <option id='filtered_slot_id' value="10">1:15 pm</option>
+            <option id='filtered_slot_id' value="11">1:30 pm</option>
+            <option id='filtered_slot_id' value="12">1:45 pm</option>
+            <option id='filtered_slot_id' value="13">2:00 pm</option>
+            <option id='filtered_slot_id' value="14">2:15 pm</option>
+            <option id='filtered_slot_id' value="15">2:30 pm</option>
+            <option id='filtered_slot_id' value="16">2:45 pm</option>
+            <option id='filtered_slot_id' value="17">3:00 pm</option>
+
+        </select>
+        <button type="text" id="adding" value="add">add</button>
+        <button type="text" id="removing" value="remove" style="display: block">remove</button>
+        
+    </body>
+
+    <script>
+        //  var xhr;
+        //           if (window.XMLHttpRequest) { // for IE7+, Firefox, Chrome, Opera, Safari
+        //             xhr = new XMLHttpRequest();
+        //             } 
+        //             else { // for IE6, IE5
+        //              xhr = new ActiveXObject("Microsoft.XMLHTTP");
+        //             }
+          
+        
+        // xhr.onreadystatechange=function()
+        //             {
+        //              if (xhr.readyState==4 && xhr.status==200)
+        //           {alert('done');
+        //             }
+        //                             } ;
+
+        // xhr.open("POST", "app_by_patient.php", false);
+        // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        // function xwwwfurlenc(srcjson){
+        //                             if(typeof srcjson !== "object")
+        //                               if(typeof console !== "undefined"){
+        //                                 console.log("\"srcjson\" is not a JSON object");
+        //                                 return null;
+        //                               }
+        //                             u = encodeURIComponent;
+        //                             var urljson = "";
+        //                             var keys = Object.keys(srcjson);
+        //                             for(var i=0; i <keys.length; i++){
+        //                                 urljson += u(keys[i]) + "=" + u(srcjson[keys[i]]);
+        //                                 if(i < (keys.length-1))urljson+="&";
+        //                             }
+        //                             return urljson;
+        //                         }
+
+        // function dexwwwfurlenc(urljson){
+        //                 var dstjson = {};
+        //                 var ret;
+        //                 var reg = /(?:^|&)(\w+)=(\w+)/g;
+        //                 while((ret = reg.exec(urljson)) !== null){
+        //                     dstjson[ret[1]] = ret[2];
+        //                 }
+        //                 return dstjson;
+        //             }
+
+        $(document).ready(function(){
+            $('#adding').hide();
+            $('#slot_id').hide();
+            $('#removing').hide();
+                
+        });
+        $('#removing').on('click',function(){
+           if(confirm('would you like to remove this appointment')){
+            var data={'slot_id':$('#slot_id').val(),'D_username':$('#myInput').val(),'remove':'remove'};
+            $.post("php/app_by_patient.php",data,function(data,status){
+                    if(status){
+                        alert('removed');
+                    }
+                    else{
+                        alert(status);
+                    }
+            });
+        // var data={'slot_id':$('#slot_id').val(),'D_username':$('#doctor_username').val(),'remove':'remove'}; 
+        // xhr.send(xwwwfurlenc(data)) ;
+       }});
+        
+        $('#adding').on('click',function(){
+        var data={'slot_id':$('#slot_id').val(),'D_username':$('#myInput').val(),'add':'add'};
+            $.post("php/app_by_patient.php",data,function(data,status){
+                    if(status){
+                        alert('added');
+                    }
+                    else{
+                        alert(status);
+                    }
+            });
+        // xhr.send(xwwwfurlenc(data)) ;
+        // });
+        });
+
+
+
+
+function myFunction() {
+    $('#myUL').empty();
+    var input, filter, ul, li, a, i, txtValue;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("myUL");
+    ul.style.display="";
+    $.get('php/doc_search.php',{'search':filter},function(data){
+        obj=JSON.parse(data);
+        obj.forEach(element => {
+          $('#myUL').append('<li id="search-list" onclick="click_func(this)"><a>'+element.email+'</a></li>');
+          });
+        });
+    }   
+
+function click_func(el) {
+ var sel=el.textContent;
+  //alert( $('#search-list').text());
+  $('#myInput').val( sel);
+  $('#adding').show();
+  $.post("php/app_by_patient.php",{'status':'ready','D_username':$('#myInput').val()},function(data,status){
+                    if(status){
+                        rp =(JSON.parse(data));
+                        if (rp.status=='success'&& rp.text!=null) {
+                            alert('su');
+                            $('#slot_id').show().append(rp.text);
+                            $('#filtered_slot_id').hide();
+                            $('#adding').hide();
+                            $('#removing').show();
+                        }else{
+                            alert('el');
+                            $('#slot_id').show();
+                            $('#adding').show();
+                        }
+                    }
+                    else{
+                        alert('el');
+                            $('#slot_id').show();
+                            $('#adding').show()
+                        alert(status);
+                    }
+                });
+}
+
+
+
+
+    </script>
+</html>

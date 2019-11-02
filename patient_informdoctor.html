@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Medic Hub</title>
+  <link rel="stylesheet" type="text/css" href="css/patient_informdoctor.css">
+  <script src="javascript/jquerry.js"></script>
+</head>
+<body>
+    <header>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">   
+            <div class="navbar">
+                    <!--
+                    <div class="logo">
+                    <img src="image/logo.jpg" height="120px" width="120px">
+                </div>-->
+
+
+
+                <nav class="fill">
+                    <ul><li><a href="patient_appointment.html">Make Appointment</a></li> 
+                        <li><a href="after_loginHome.html"><i class="fa fa-home"></i>&nbsp;HOME</a></li>
+                        <li><a href="support.html"><i class="fa fa-thumbs-o-up"></i>&nbsp;FAQ/SUPPORT</a></li>
+                  
+                      
+                        <li id='sign_out'><a href="initial_mainframe.html"><i class="fa fa-sign-out"></i>&nbsp;SIGN-OUT</a></li>
+                     
+                    </ul>
+                  </nav>
+                </section>
+                <section style="background: #34495e; color: rgba(255, 255, 255, 0.5);">
+            </div><br>
+
+          <div class="bg-img">
+                       <div class="container">
+                      
+                          <div class="vertical-menu">
+                            <a href="patient_home.html" ><i class="fa fa-home"></i>&nbsp; DashBoard</a>
+                            <a href= "#" class="active"><i class="fa fa-inbox"></i>&nbsp;  Inform  Doctor </a>
+                            <a href="patient_recommmedicines.html"><i class="fa fa-medkit"></i>&nbsp; Recommended Medicines</a>
+                            <a href="patient_searchdoctor.html" ><i class="fa fa-user-md"></i>&nbsp; Search Doctor</a>
+                            <a  href ="patient_searchmedicines.html" ><i class="fa fa-search"></i>&nbsp; Search Medicines</a>
+                            <a href="patient_doctoremail.html"><i class="fa fa-envelope-o"></i>&nbsp; Doctor Mail</a>
+                           
+                          </div>
+                        </div>
+                      </div>
+                      <br>
+                      <br>
+                      <div class="new_row row"></div>
+
+
+
+    </header>
+
+    <script>
+var xmlhttp;
+      if (window.XMLHttpRequest) { // for IE7+, Firefox, Chrome, Opera, Safari
+                    
+                xmlhttp = new XMLHttpRequest();
+                } 
+      else { // for IE6, IE5
+                   
+                     xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                  
+       xmlhttp.onreadystatechange=function()
+           {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+                  {
+                  
+                  var rp=xmlhttp.responseText;
+                  $('.new_row').append(rp);
+
+        }
+      } ;                     
+      xmlhttp.open("POST", "php/P_doctor_retrive.php", false);
+                 
+                 xmlhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      
+      //var data={'fetch_name':'true'};
+      
+      xmlhttp.send('fetch_name=true');
+
+
+//fetching individual card detail
+    $('.column').click(function () { 
+    var id_no=$(this).children('.card').children('.container').children('#card_id').text();
+    //alert(id_no);
+   
+    var xmlhttp2;
+         if (window.XMLHttpRequest) { // for IE7+, Firefox, Chrome, Opera, Safari
+                   
+                xmlhttp2 = new XMLHttpRequest();
+                } 
+          else { // for IE6, IE5
+                   
+                     xmlhttp2 = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                  
+        xmlhttp2.onreadystatechange=function()
+        {
+            if (xmlhttp2.readyState==4 && xmlhttp2.status==200)
+                  {alert('in on load');
+                  html='';
+                  med='';
+                  test='';
+                  subtest='';
+                  var rp=xmlhttp2.responseText;
+                  rp=JSON.parse(rp);
+                  
+                  rp.medicines.forEach(function(element){
+                       med=med+"<div id='med'> medicine name "+element.name+" <br> Dosage "+element.dosage+"</div>";
+                  });
+                  rp.test.forEach(function(element){
+                      element.sub_test.forEach(function(el){
+                        subtest=subtest+"<div id='sub_test'> Sub Test: "+el.sub_name+" <br>Measurements: "+el.measurement+" <br> Range: "+el.range+" </div>"
+                      });
+                      test=test+"<div id='test'>TEST NAME: "+element.name+"<br>PERFORMER: "+element.performer+"<br>TESTS <br>  "+subtest+"<br>OUTCOME: "+element.outcome+"</div>";
+
+                  });
+
+                  html=html+"<div id='diagnosis_detail'>"+test+rp.prescription+med+"</div>";
+                  // rp.forEach(function(item){
+                  //   item.forEach(function(){
+
+                  //   })
+                  // });
+                  $('.card').fadeOut(300).after(html);
+                  $('#diagnosis_detail').hover(function(){},function(){$(this).fadeOut(420);
+                                                                       $('.card').fadeIn(600);});
+                  
+
+                }
+      } ;                     
+      xmlhttp2.open("POST", "php/P_doctor_retrive.php", false);
+                 
+      xmlhttp2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      
+      //var data={'fetch_name':'true'};
+      
+    
+      var sending_data="card_id="+id_no;
+
+      xmlhttp2.send(encodeURI(sending_data));
+    });  
+
+     $('#sign_out').on('click',function() {
+        $(this).fadeOut(200);
+        $(this).load('php/logout.php');
+        sessionStorage.removeItem('profession');
+        window.open('initial_mainframe.html','_self');}
+        );
+      </script>
+</body>
+</html>

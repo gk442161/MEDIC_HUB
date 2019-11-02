@@ -1,0 +1,164 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="css/appointment_stage1.css">
+        <script
+        src="javascript/jquerry.js"
+></script>
+    </head>
+    <body>
+    
+    <div class="appointment">
+        <div class="start">
+            <input class="apt-btn" id="start_btn" type="button" value="START"> 
+            <input class="apt-btn" id="hold_btn" type="button" value="HOLD">
+            <div id="appointment-list" style="display: none;">
+
+                            <table>
+                                <thead>
+                                <tr>
+                                    <td>PATIENT NAME</td>
+                                    <td>PHONE NUMBER</td>
+                                    <td>APPOINTMENT TIMING</td>
+                                    <td>APPOINTMENT DATE</td>
+                                    <td>STATUS</td>
+                                </tr>
+                            </thead>
+                            <tbody id="start_appt_list">
+
+                            </tbody >
+                
+
+                            </table>
+
+            </div>
+            <button class="apt-btn" id="done-start-btn" type="submit">DONE</button>
+        </div>
+        <div class="extend">
+            <div>
+                <input id="extend_btn" type="button" value="Extend" class="apt-btn">
+            </div>
+            <div id="extend-time" style="display:none;align-content: center;">
+                <div style="flex: 1;">
+                <p>Enter the starting time</p>
+                <input type="time">
+                </div>
+                <div style="flex: 1;">
+                <p>Enter the ending time</p>
+                <input type="time">
+                </div>
+                <input class="apt-btn" style="flex: 1; margin-top: 30px;" id="done-extend-btn" type="submit" value="DONE">
+            </div>    
+        </div>
+        <div class="appt-list">
+            <button id="appt-list-back" style="display: none;">Back</button>
+            <button name="appointment-list" class="apt-btn" id="appointment_list_btn"> show appointment list</button>
+            <div id="appt-list-only" style="display: none;">
+
+                    <table>
+                            <thead >
+                            <tr >
+                                <td>PATIENT NAME</td>
+                                <td>PHONE NUMBER</td>
+                                <td>APPOINTMENT TIMING</td>
+                                <td>APPOINTMENT DATE</td>
+                                <td>STATUS</td>
+                            </tr>
+                        </thead>
+                        <tbody id="start_appt_list">
+
+                        </tbody >
+            
+
+                        </table>
+
+    </div>
+    <br>
+    <br>
+    <div id="status"></div>
+        </div>
+
+    </div>
+
+    <script>
+        // $.post('php/timing_part.php',function(data,status){
+        //         $('#status').append(data);});
+        $('#start_btn').on('click',function(){ 
+            $('#appointment-list tbody').empty();
+            alert('sdf');
+            $.post('php/doctor_appts.php',{'app_made':'yes'},function(data,status){
+                $('#start_appt_list').append(data);
+            });
+            
+           $('.start div').css('display','flex');
+           $('.extend,.appt-list,#start_btn').hide();
+           $('#hold_btn ,#done-start-btn').fadeIn(200);
+           st=0;
+         
+        });
+ 
+               
+
+        
+        
+        $('#hold_btn').on('click',function(){
+            
+            if(confirm('would you like to hold')){
+                alert('time is stoped');
+                $('#hold_btn').hide();
+                $('#start_btn').fadeIn(1000);
+                $('#start_btn').addClass('freeze-appt');
+                $('#main_status').removeAttr('onclick');
+                
+            }
+        });
+
+        $('.freeze-appt').on('click',function(){
+            $('.not_done #main_status').attr('onclick','updating_status(this)');
+        });
+
+        $('#done-start-btn').on('click',function(){
+            $('.appointment').empty();
+        });
+       
+        $('.extend').on('click',function(){
+            $('.start,.appt-list').hide();
+            $('#extend-time').show();
+        });
+        $('#done-extend-btn').on('click',function(){
+            $('.appointment').empty();
+        });
+
+        $('.appt-list').on('click',function(){
+            $('.start,.extend,#appointment_list_btn ').hide();
+            
+            $('#appt-list-only,#appt-list-back').show();
+            $.post('php/doctor_appts.php',{'app_made':'yes'},function(data,status){
+                $('#appt-list-only #start_appt_list').append(data);
+            });
+        });
+
+        $('#appt-list-back').on('click',function(){
+            location.reload(true);
+            $(this).hide();
+        });
+
+        function updating_status(el){
+            
+              if (el.textContent=='not_done') {
+                    el.style.backgroundColor='black'
+                  //alert($(this).text());
+
+                  alert('dfd'+''+el.parentNode.id);
+                  $obj={"done":"yes","slot_id":el.parentNode.id};
+                  $obj=JSON.stringify($obj);
+                  $.post('php/doctor_appts.php',{'x':$obj},function(data,status){
+                    if (status) {
+                        alert('going good');
+                        
+                    }
+                  });
+              }
+        }
+          </script>
+    </body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Doctor_Confirm_Details</title>
+  <link rel="stylesheet" type="text/css" href="css/Doctor_Confirm_Details_style.css">
+  <script src="javascript/jquerry.js"></script>
+</head>
+
+
+
+<body>
+
+  <div class="navbar">
+                    <!--
+                    <div class="logo">
+                    <img src="image/logo.jpg" height="120px" width="120px">
+                </div>-->
+
+
+
+                <nav class="fill">
+                    <ul>
+                          <li><a href="support.html"><i class="fa fa-eye"></i>&nbsp;FAQ/SUPPORT</a></li>
+                  
+                      <li><a href="#"><i class="fa fa-user-plus"></i>&nbsp;SIGN-UP</a></li>
+                        <li><a href="login.html">&nbsp;SIGN-IN</a></li>
+                     
+                    </ul>
+                  </nav>
+                </section>
+                <section style="background: #34495e; color: rgba(255, 255, 255, 0.5);">
+            </div><br>
+
+
+  <header>
+        <script>
+
+      function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+      }
+      
+      // Close the dropdown if the user clicks outside of it
+      window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+          var dropdowns = document.getElementsByClassName("dropdown-content");
+          var i;
+          for (i = 0; i < dropdowns.length; i++) {
+            var openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+              openDropdown.classList.remove('show');
+            }
+          }
+        }
+      }
+
+
+      </script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">   
+          
+
+   
+
+
+    </header>
+
+<h1>Please confirm your details</h1>
+<div class="box"><br><br>
+<div class="pfi">
+  <h1>Profile Image</h1>
+	<div class="profile_image">
+  </div>
+</div>
+	<br><br>
+<script LANGUAGE="JavaScript">
+
+
+
+  savedData = JSON.parse(localStorage.getItem('form_data'));
+
+  console.log(savedData);
+
+  $('.profile_image').append('<img src=uploads/'+savedData['username']+'/profile >');
+firstname =  savedData["firstname"];
+lastname =  savedData["lastname"];
+email=  ( savedData["email"]);
+phno= ( savedData["phone_number"]);
+bday= ( savedData["dob"]);
+bmonth= ( savedData["bmonth"]);
+byear= ( savedData["byear"]);
+gender= ( savedData["gender"]);
+age =  ( savedData["age"]);
+blood_group= ( savedData["blood_group"]);
+
+medicalschool= ( savedData["medicalschool"]);
+internships= ( savedData["internships"]);
+speciality= ( savedData["speciality"]);
+certification_title1= ( savedData["certification_title1"]);
+c1day= ( savedData["c1day"]);
+c1month= ( savedData["c1month"]);
+c1year= ( savedData["c1year"]);
+certification_title2= ( savedData["certification_title2"]);
+c2day= ( savedData["c2day"]);
+c2month= ( savedData["c2month"]);
+c2year= ( savedData["c2year"]);
+exp= ( savedData["exp"]);
+
+residental_address= ( savedData["residental_address"]);
+residental_state= ( savedData["residental_state"]);
+residental_city= ( savedData["residental_city"]);
+residental_zipcode= ( savedData["residental_zipcode"]);
+
+clinic_address= ( savedData["clinic_address"]);
+clinic_state= ( savedData["clinic_state"]);
+clinic_city= ( savedData["clinic_city"]);
+clinic_zipcode= ( savedData["clinic_zipcode"]);
+
+
+var firstname = firstname.replace(/[+]/g," "); 
+var lastname=lastname.replace(/[+]/g," ");
+document.write('<p id="jstext1"> Welcome Dr. ' + firstname+  lastname+'</p>')
+
+var email=email;
+document.write('<p id="jstext"> Email:- ' +email+'</p>')
+
+var phno=phno.replace("+"," ");
+document.write('<p id="jstext"> Phno:-' +phno+'</p>')
+
+var bday=bday.replace(/[+]/g," ");
+var bmonth=bmonth.replace(/[+]/g," ");
+var byear=byear.replace(/[+]/g," ");
+var dob=bday+'/'+bmonth+'/'+byear;
+document.write('<p id="jstext"> Birth Date:- '+dob+'</p>');
+
+var gender=gender.replace(/[+]/g," ");
+document.write('<p id="jstext"> Gender:- ' +gender+'</p>');
+
+var age=age.replace(/[+]/g," ");
+document.write('<p id="jstext"> Age:-  ' +age+'</p>');
+
+var blood_group=blood_group;
+document.write('<p id="jstext"> Blood Group:-  ' +blood_group+'</p>');
+
+var medicalschool=medicalschool.replace(/[+]/g," ");
+document.write('<p id="jstext"> Medical School:-  ' +medicalschool+'</p>');
+
+var internships=internships.replace(/[+]/g," ");
+document.write('<p id="jstext"> Internships:- ' +internships+'</p>');
+
+var speciality=speciality.replace(/[+]/g," ");
+document.write('<p id="jstext"> Speciality:- ' +speciality+'</p>');
+
+var certification_title1=certification_title1.replace(/[+]/g," ");
+document.write('<p id="jstext">  Certification_title1:-' +certification_title1+'</p>');
+
+var c1day=c1day.replace(/[+]/g," ");
+var c1month=c1month.replace(/[+]/g," ");
+var c1year=c1year.replace(/[+]/g," ");
+document.write('<p id="jstext">Exprire Date:-' +c1day+ "/" +c1month+ "/" +c1year+ '</p>');
+
+
+var certification_title2=certification_title2.replace(/[+]/g," ");
+document.write('<p id="jstext">  Certification_title2:-' +certification_title2+'</p>');
+
+var c2day=c2day.replace(/[+]/g," ");
+var c2month=c2month.replace(/[+]/g," ");
+var c2year=c2year.replace(/[+]/g," ");
+document.write('<p id="jstext">Exprire Date:- ' +c2day+ "/" +c2month+ "/" +c2year+ '</p>');
+
+var exp=exp.replace(/[+]/g," ");
+document.write('<p id="jstext"> Years of experiences:-  ' +exp+'</p>');
+
+var residental_address=residental_address.replace(/[+]/g," ");
+document.write('<p id="jstext"> Residental_address:- ' +residental_address+'</p>');
+
+var residental_state=residental_state.replace(/[+]/g," ");
+document.write('<p id="jstext"> Residental_state:- ' +residental_state+'</p>');
+
+var residental_city=residental_city.replace(/[+]/g," ");
+document.write('<p id="jstext">  Residental_city:- ' +residental_city+'</p>');
+
+var residental_zipcode=residental_zipcode.replace(/[+]/g," ");
+document.write('<p id="jstext">  Residental_zipcode:- ' +residental_zipcode+'</p>');
+
+var clinic_address=clinic_address.replace(/[+]/g," ");
+document.write('<p id="jstext">   Clinic_address:-' +clinic_address+'</p>');
+
+var clinic_state=clinic_state.replace(/[+]/g," ");
+document.write('<p id="jstext"> Clinic_state:- ' +clinic_state+'</p>');
+
+var clinic_city=clinic_city.replace(/[+]/g," ");
+document.write('<p id="jstext">  Clinic_city:- ' +clinic_city+'</p>');
+
+var clinic_zipcode=clinic_zipcode.replace(/[+]/g," ");
+document.write('<p id="jstext">  Clinic_zipcode:- ' +clinic_zipcode+'</p>');
+
+</script>
+</div>
+<br>
+
+	<input type="checkbox" name="Agree" required="required">
+				<span><a href="#">I agree that all my details mention above  are correct</a></span>
+				<br><br><br>
+
+	<button class="submit">
+		<a href="Doctor_ID_Generation.html">Submit</a>
+		</button>
+
+		<button class="return">
+			<a href="Doctor_Registration.html">Return</a>
+		</button>
+		<br><br>
+
+</body>
+<script>
+  $('.submit').on('click',function(e){
+    savedData['submit']='submit';
+    e.preventDefault();
+    alert('ghh');
+    
+    var conformation= confirm('Would you like to submit');
+    if (conformation){
+      
+
+      savedData['dob']=dob;
+      delete savedData['bmonth'];
+      delete savedData['byear'];
+      localStorage.removeItem('form_data');
+      $.post('php/Dsigning_up_detail.php',{'json':JSON.stringify(savedData)},function(data){
+        localStorage.setItem('generated_id',data);
+        localStorage.setItem('generated_name',firstname+' '+lastname);
+        window.open('Doctor_ID_Generation','_self');
+          });
+    }
+    
+  });
+  
+
+</script>
+</html>
