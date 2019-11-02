@@ -1,0 +1,235 @@
+*{
+      margin: 0;
+      padding: 0;
+}
+
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+.logo h1:hover{
+    cursor: pointer;
+   
+    text-decoration-line: underline ;
+}
+
+
+  
+  body {
+    font-family: Times New Roman;
+  }
+  .logo h1{
+    font-weight: 600;
+    font-family: Times New Roman;
+    font-size: 38px;
+    color: #255C45;
+    font-style: bold;
+    text-align: center;
+    padding-top: 30px;
+  }
+.login-box{
+  width :45%;
+  text-align: center;
+  border-radius: 10px;
+  border-color: #888888;
+
+}
+.cointainer1{
+  padding-top: 60px;
+  padding-left: 530px;
+}
+.login-word{
+  color:#615E5E;
+  font:30px sofia-pro-light;
+  background: #ffffff;
+  margin: 0 0 0 -3px;
+  padding: 0px 15px;
+
+}
+
+
+
+
+.container{
+  color: #343434;
+  font:20px sofia-pro-light;
+  margin: 30px 30px 30px 30px;
+
+}
+.container p{
+  color: #343434;
+  font:20px sofia-pro-light;
+  margin: 30px 30px 30px 30px;
+
+}
+
+input[type="text"], input[type="password"] {
+
+  margin-top: 10px;
+  border-color: none;
+  
+  padding: 15px 20px;
+  text-align: left;
+  width: 80%;
+  text-decoration: none;
+  
+  font-size: 16px;
+
+}
+input[type="text"]:hover, input[type="password"]:hover {
+
+  text-align: left;
+
+text-decoration: none;
+font-size: 16px;
+box-shadow: 0 0 10px
+lightskyblue;
+
+}
+
+::placeholder{
+
+  color:black;
+  font-size: 18px;  
+
+}
+
+.submit
+{
+  margin-top: 10px;
+border-radius: 10px;
+  background-color: #3FAE49;
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+  width: 92%;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 19px;
+  cursor: pointer;
+
+}
+
+.submit:hover
+{
+  margin-top: 10px;
+  border-color:#3F4E2F;
+
+  background-color: green;
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+  width: 92%;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 22px;
+  cursor: pointer;
+
+}
+
+.lab a{
+  color: #255C45;
+  font-size: xx-large;
+}
+
+a{
+
+  
+  color: inherit;
+  margin-top: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: inherit;
+  /* cursor: pointer; */
+}
+
+h1 a:hover{
+ 
+  background-size: 100% 5px;
+  background-position: 0 bottom;
+  background-image: linear-gradient(76deg, rgba(235,172,54,1) 0%, rgba(46,212,193,0.8463585263206845) 49%,
+  rgba(69,154,236,0.9471988624551383) 100%);
+  background-repeat: no-repeat;
+ }
+
+
+
+
+.login {
+  margin-top: 10px;
+  margin-left: 8%;
+  text-align: center;
+  
+  display: inline-block;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 1250px){
+
+
+.logo h1{
+    font-weight: 600;
+    font-family: Times New Roman;
+    font-size: 38px;
+    color: #255C45;
+    font-style: bold;
+    padding-top: 30px;
+  }
+
+.login-box{
+  width: 80%;
+
+}
+
+
+
+.cointainer1{
+    width: 50%;
+    margin-left: -16%;
+
+}
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 640px){
+
+
+.logo h1{
+    font-weight: 600;
+    font-family: Times New Roman;
+    font-size: 38px;
+    color: #255C45;
+    font-style: bold;
+    padding-top: 30px;
+  }
+
+
+.login-box{
+  width: 100%;
+
+}
+
+.cointainer1{
+    width: 70%;
+    margin-left: -90%;
+
+}
+
+}

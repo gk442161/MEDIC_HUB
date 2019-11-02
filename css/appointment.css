@@ -1,0 +1,30 @@
+.appointment{
+    
+    background-color: #24b7add7; /*Change color according to the selected menu background color*/
+    display: flex;
+    background-color: aquamarine;
+    
+    align-items: center;
+    text-align: center;
+    transition: all 3s;
+}
+
+.appointment > div {
+    flex: inherit;
+    margin-inline-start: 25%;
+}
+
+.appointment input, .appointment button {
+
+    height: 50px;
+    width: 90px;
+    background-color: brown;
+    border-color: blue;
+    
+
+}
+
+#hold_btn,#done-start-btn{
+   
+    display: none;
+}

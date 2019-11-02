@@ -1,0 +1,70 @@
+.appointment{
+    
+    display: flex;
+    background-color: #24b7ad;
+    border-radius: 40px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: all 3s;
+    
+}
+
+
+.appointment>div{
+    margin-inline-end: 20px;
+}
+
+
+.apt-btn{
+    height: 50px;
+    width: max-content;
+    color: white;
+    font-size: 29px;
+    /* border-color: #C215EA; */
+    border-radius: 40px;
+    border-width: 0;
+    box-shadow: 0 0 20px #0B9EF8;
+    transition: all .5s;
+
+}
+.apt-btn:hover{
+    transform: scale(1.3);
+}
+
+#start_btn{
+    /* background-image: url(grn_btn.jpg); */
+    /* background-size: cover; */
+    background-color: #3DB2FA;
+    /* border-color: #3DB2FA; */
+    
+}
+#extend_btn{
+    /* background-image: url(or_btn.jpg); */
+    /* background-size: cover; */
+    background-color: #FA3DB2;
+    
+}
+
+#appointment_list_btn{
+    /* background-image: url(blu_btn.jpg);
+    background-size: cover; */
+    background-color: #B2FA3D;
+    
+}
+
+#hold_btn,#done-start-btn{
+   
+    display: none;
+}
+  
+#appt-list-only #main_status{
+    display: none;
+}
+
+.not_done #main_status{
+    background-color: tomato;
+}
+.done #main_status{
+    background-color: green;
+}
